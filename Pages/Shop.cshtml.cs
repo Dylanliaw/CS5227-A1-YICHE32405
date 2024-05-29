@@ -73,6 +73,7 @@ public class ShopModel : PageModel
         {
             // If the search query is empty, return all food items
             Menus = _context.Menus.ToList();
+            Message = "No matching food items found.";
         }
         else
         {
