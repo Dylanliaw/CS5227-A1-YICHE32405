@@ -1,0 +1,30 @@
+﻿@page
+@model ShopModel
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<h2 class="text-center">Menu</h2>
+<div class="menu-container">
+    @foreach (var food in Model.Menus)
+    {
+        <div class="menu-item">
+            <div class="menu-img-container">
+                <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+            </div>
+            <div class="menu-details">
+                <div class="menu-name">@food.FoodName</div>
+                <div class="menu-description">@food.Description</div>
+                <div class="menu-price">$@food.Price</div>
+                <form method="post" asp-page-handler="AddToCart">
+                    <input type="hidden" name="foodId" value="@food.FoodId" />
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Notification Message -->
+<div id="cart-notification" class="alert alert-success" style="display: none;">Item added to cart!</div>
+

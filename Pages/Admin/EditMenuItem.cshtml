@@ -1,0 +1,30 @@
+﻿@page
+@model CS5227_A1_YICHE32405.Pages.Admin.EditMenuItemModel
+@{
+}
+
+<h2>Edit Menu Item</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Menu.FoodName"></label>
+        <input asp-for="Menu.FoodName" class="form-control" />
+        <span asp-validation-for="Menu.FoodName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Menu.Description"></label>
+        <textarea asp-for="Menu.Description" class="form-control"></textarea>
+        <span asp-validation-for="Menu.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Menu.Price"></label>
+        <input asp-for="Menu.Price" class="form-control" />
+        <span asp-validation-for="Menu.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="image">Menu Image</label>
+        <input type="file" name="Image" class="form-control-file" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
