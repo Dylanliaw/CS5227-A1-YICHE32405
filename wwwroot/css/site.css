@@ -10,9 +10,56 @@ html {
     }
 }
 
+.container {
+    margin-top: 0px;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+
+.bg-custom {
+    background-color: #E8DFCA;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    margin-right: 20px; /* Adjust the margin for wider space */
+}
+
+.navbar-nav {
+    margin-left: 20px; /* Adjust the margin for wider space */
+}
+
+.navbar-toggler {
+    order: -1; /* Moves the toggler to the left */
+}
+
+.navbar-cart {
+    margin-left: 10px; 
+    margin-right: 0px; 
+}
+
+.navbar-cart img {
+    width: 24px; /* Adjust the width */
+    height: 24px; /* Adjust the height */
+    margin-left: 20px; /* Pushes the cart to the right */
+    margin-right:0px;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff; /* White color for the links */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #006769; /* Change to the specified color when hovered */
+}
+
 
 html {
     position: relative;
@@ -22,6 +69,7 @@ html {
 body {
     margin-bottom: 60px;
 }
+
 /* Center the menu */
 .menu-container {
     max-width: 1200px; /* Increase max-width for wider columns */
@@ -188,24 +236,24 @@ body {
     background-color: #fff;
 }
 
-    .cart-table th, .cart-table td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd; /* Add border to bottom of td */
-        border-top: none; /* Remove border from top of td */
-    }
+.cart-table th, .cart-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Add border to bottom of td */
+    border-top: none; /* Remove border from top of td */
+}
 
-    .cart-table th {
-        background-color: #f2f2f2;
-    }
+.cart-table th {
+    background-color: #f2f2f2;
+}
 
-    .cart-table td img {
-        max-width: 100px;
-    }
+.cart-table td img {
+    max-width: 100px;
+}
 
-    .cart-table tfoot td {
-        font-weight: bold;
-    }
+.cart-table tfoot td {
+    font-weight: bold;
+}
 
 .cart-total {
     margin-top: 20px;
