@@ -1,4 +1,5 @@
 @import url('site.css');
+@import url('site.css');
 html {
     font-size: 14px;
 }
@@ -224,4 +225,76 @@ body {
 .cart-pic {
     max-width: 100px; /* Adjust the maximum width of the image as needed */
     height: auto; /* Maintain aspect ratio */
+}
+
+.alert-success {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #28a745; /* Green background color */
+    color: #fff; /* White text color */
+    border-radius: 5px; /* Rounded corners */
+    animation: fadeInOut 1.5s ease-in-out forwards; /* Apply fade in/out animation */
+    opacity: 0; /* Start with 0 opacity */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    /* Start with 0 opacity */
+    10% {
+        opacity: 1;
+    }
+    /* Fade in */
+    90% {
+        opacity: 1;
+    }
+    /* Stay visible */
+    100% {
+        opacity: 0;
+    }
+    /* Fade out */
+}
+
+.highlight {
+    color: #ff0000; /* Red color for highlighting */
+    font-weight: bold; /* Make the text bold */
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.title-hr {
+    border-top: 2px solid #000; /* Black horizontal line */
+    width: 50px; /* Adjust width as needed */
+    margin: 0 10px; /* Adjust margin as needed */
+}
+
+/* Styles for the footer */
+.footer {
+    background-color: #E4FDE1; /* Light green color */
+    color: #2F4F4F; /* Dark slate gray text color */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+.footer a {
+color: #2F4F4F; /* Dark slate gray text color */
+}
+
+.footer a:hover {
+    color: #8B0000; /* Dark red color on hover */
+}
+
+.search-bar {
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center items horizontally */
 }

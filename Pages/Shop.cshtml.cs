@@ -66,4 +66,32 @@ public class ShopModel : PageModel
 
         return RedirectToPage();
     }
+
+    public IActionResult OnGetSearch(string query)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            // If the search query is empty, return all food items
+            Menus = _context.Menus.ToList();
+        }
+        else
+        {
+            // Filter food items based on the search query
+            Menus = _context.Menus.Where(m => m.FoodName.Contains(query)).ToList();
+        }
+
+        if (Menus.Count == 0)
+        {
+            // If no food items match the search query, display a message
+            Message = "No matching food items found.";
+        }
+        else
+        {
+            // Clear any previous message
+            Message = null;
+        }
+
+        // Refresh the page to display the search results
+        return Page();
+    }
 }

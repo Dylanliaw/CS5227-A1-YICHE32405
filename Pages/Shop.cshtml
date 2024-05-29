@@ -4,7 +4,21 @@
     ViewData["Title"] = "Menu";
 }
 
-<h2 class="text-center">Menu</h2>
+<!-- Title with horizontal lines -->
+<div class="page-title">
+    <hr class="title-hr" />
+    <h2 class="text-center">Menu</h2>
+    <hr class="title-hr" />
+</div>
+
+<!-- Search bar -->
+<div class="search-bar">
+    <form method="get" asp-page-handler="Search">
+        <input type="text" name="query" placeholder="Search for food items..." />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
 <div class="menu-container">
     @foreach (var food in Model.Menus)
     {
