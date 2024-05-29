@@ -25,6 +25,7 @@
     }
 </div>
 
-<!-- Notification Message -->
-<div id="cart-notification" class="alert alert-success" style="display: none;">Item added to cart!</div>
-
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success">@Model.Message</div>
+}

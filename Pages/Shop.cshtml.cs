@@ -19,9 +19,16 @@ public class ShopModel : PageModel
     public List<Menu> Menus { get; set; }
     public List<CartItem> CartItems { get; set; }
 
+    [TempData]
+    public string Message { get; set; }
+
     public void OnGet()
     {
         Menus = _context.Menus.ToList();
+
+        // Retrieve cart items
+        var cart = HttpContext.Session.GetString("cart");
+        CartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
     }
 
     public IActionResult OnPostAddToCart(int foodId)
@@ -54,12 +61,9 @@ public class ShopModel : PageModel
 
         HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cartItems));
 
-        return RedirectToPage();
-    }
+        // Set message for item added
+        Message = $"{foodItem.FoodName} added to cart.";
 
-    public void OnGetCart()
-    {
-        var cart = HttpContext.Session.GetString("cart");
-        CartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
+        return RedirectToPage();
     }
 }
