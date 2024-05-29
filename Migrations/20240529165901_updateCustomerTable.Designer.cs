@@ -4,6 +4,7 @@ using CS5227_A1_YICHE32405.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS5227_A1_YICHE32405.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529165901_updateCustomerTable")]
+    partial class updateCustomerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,34 +208,6 @@ namespace CS5227_A1_YICHE32405.Migrations
                     b.ToTable("Menus");
                 });
 
-            modelBuilder.Entity("CS5227_A1_YICHE32405.Model.SpecialOffer", b =>
-                {
-                    b.Property<int>("FoodId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FoodId"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FoodName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.HasKey("FoodId");
-
-                    b.ToTable("SpecialOffers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -262,19 +237,19 @@ namespace CS5227_A1_YICHE32405.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4212bc2-ce3e-4c9f-be69-72490488ee23",
+                            Id = "463ef86d-0b7f-4fad-934f-bc982fe9d79b",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "25fbbf7b-1682-4d1a-a125-06ccf55285b1",
+                            Id = "5b167529-07e4-4ed1-af05-a70444d09fb0",
                             Name = "client",
                             NormalizedName = "client"
                         },
                         new
                         {
-                            Id = "72298249-552e-40b0-bfc9-d3112ce67d40",
+                            Id = "c9da7174-9b31-4f0e-ae58-0838af9abf97",
                             Name = "seller",
                             NormalizedName = "seller"
                         });

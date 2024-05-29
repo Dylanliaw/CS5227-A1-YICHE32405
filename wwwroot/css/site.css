@@ -298,3 +298,24 @@ color: #2F4F4F; /* Dark slate gray text color */
     display: flex; /* Use flexbox layout */
     justify-content: center; /* Center items horizontally */
 }
+
+/* Style for the map container */
+#map {
+    height: 400px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Style for the map when JavaScript is disabled */
+.map-fallback {
+    display: none;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    #map {
+        height: 300px;
+    }
+}

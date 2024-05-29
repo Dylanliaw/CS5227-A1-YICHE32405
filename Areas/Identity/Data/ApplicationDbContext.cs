@@ -18,6 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<Customer> Customer { get; set; }
 
+    public DbSet<SpecialOffer> SpecialOffers { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)
