@@ -30,7 +30,8 @@
                             <div class="input-group">
                                 <button type="submit" name="action" value="decrease" class="btn btn-sm btn-danger">-</button>
                                 <input type="number" class="form-control" name="quantity" value="@item.Quantity" min="1" />
-                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-primary">+</button>
+                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-primary ml-1">+</button>
+                                <!-- Added margin class "ml-1" to the plus symbol button -->
                             </div>
                         </form>
                     </td>
@@ -54,7 +55,7 @@
     <form method="post" asp-page-handler="ClearCart">
         <button type="submit" class="btn btn-danger">Clear Cart</button>
     </form>
-    <a asp-page="/Checkout" class="btn btn-primary">Proceed to Checkout</a>
+    <a asp-page="/Sale/Checkout" class="btn btn-primary">Proceed to Checkout</a>
 }
 else
 {
