@@ -1,0 +1,19 @@
+﻿@page
+@model CS5227_A1_YICHE32405.Pages.Sale.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<h2>Order Confirmation</h2>
+
+<div>
+    <p>Your order has been successfully placed! Your order details are as follows:</p>
+
+    <!-- Display customer information -->
+    <p>Name: @Model.CustomerName</p>
+    <p>Email: @Model.CustomerEmail</p>
+    <p>Phone: @Model.CustomerPhone</p>
+    <p>Order Time: @Model.OrderTime</p>
+</div>
+
+<a href="/Sale/Shop" class="btn btn-primary">Continue Shopping</a>
