@@ -1,0 +1,66 @@
+﻿@page
+@model CS5227_A1_YICHE32405.Pages.Sale.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+<h3>Your Cart Items</h3>
+@if (Model.CartItems.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td><img src="@item.ImageUrl" alt="@item.FoodName" width="50" /></td>
+                    <td>@item.FoodName</td>
+                    <td>$@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>$@(item.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Total:</td>
+                <td>$@(Model.CartItems.Sum(item => item.Price * item.Quantity).ToString("0.00"))</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h3>Customer Information</h3>
+    <form method="post">
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <input type="text" id="Name" name="Name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Phone">Phone:</label>
+            <input type="tel" id="Phone" name="Phone" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="OrderTime">Order Time:</label>
+            <input type="text" id="OrderTime" name="OrderTime" class="form-control" readonly value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

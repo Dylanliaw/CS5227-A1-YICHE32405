@@ -4,6 +4,7 @@ using CS5227_A1_YICHE32405.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS5227_A1_YICHE32405.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530092448_addsaletodb")]
+    partial class addsaletodb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,19 +299,19 @@ namespace CS5227_A1_YICHE32405.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96611f5e-8822-4374-91e6-dd17971bafc1",
+                            Id = "16a4f3ee-a85e-4298-9cc3-2fecc5c4b677",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "c7e8cbcf-54cb-4766-a7cb-20c75ad40f05",
+                            Id = "6638ddf0-e2c8-4c4a-9c14-5641edbd7803",
                             Name = "client",
                             NormalizedName = "client"
                         },
                         new
                         {
-                            Id = "8a27771a-b799-4e94-87fa-182c2d3682b9",
+                            Id = "b54a96bb-3e95-4868-83c5-18563a84e5b1",
                             Name = "seller",
                             NormalizedName = "seller"
                         });

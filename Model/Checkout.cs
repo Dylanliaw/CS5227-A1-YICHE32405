@@ -1,12 +1,14 @@
-﻿namespace CS5227_A1_YICHE32405.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CS5227_A1_YICHE32405.Model
 {
     public class Checkout
     {
-        public int FoodId { get; set; }
-        public string? FoodName { get; set; }
-        public string? Description { get; set; }
-        public float Price { get; set; }
-        public string ImageUrl { get; set; }
-        public int Quantity { get; set; }
+        [Key]
+        public int id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public DateTime OrderTime { get; set; }
     }
 }

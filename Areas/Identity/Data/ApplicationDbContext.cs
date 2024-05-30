@@ -20,6 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<SpecialOffer> SpecialOffers { get; set; }
 
+    public DbSet<Sale> Sales { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

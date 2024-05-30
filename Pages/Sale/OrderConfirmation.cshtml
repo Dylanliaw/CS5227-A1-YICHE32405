@@ -1,0 +1,10 @@
+﻿@page
+@model CS5227_A1_YICHE32405.Pages.Sale.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<h2>Order Confirmation</h2>
+
+<p>Thank you for your order, @Model.CustomerName!</p>
+<p>We have received your order placed on @Model.OrderedTime.ToString("f").</p>

@@ -4,6 +4,7 @@ using CS5227_A1_YICHE32405.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS5227_A1_YICHE32405.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530091822_sale")]
+    partial class sale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,40 +208,6 @@ namespace CS5227_A1_YICHE32405.Migrations
                     b.ToTable("Menus");
                 });
 
-            modelBuilder.Entity("CS5227_A1_YICHE32405.Model.Sale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CheckoutId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OrderTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sales");
-                });
-
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.SpecialOffer", b =>
                 {
                     b.Property<int>("FoodId")
@@ -296,19 +265,19 @@ namespace CS5227_A1_YICHE32405.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96611f5e-8822-4374-91e6-dd17971bafc1",
+                            Id = "5301998e-35c4-4cb6-8364-8b0c94a6388e",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "c7e8cbcf-54cb-4766-a7cb-20c75ad40f05",
+                            Id = "f790bc57-24d9-45e2-a23b-a12c6b141275",
                             Name = "client",
                             NormalizedName = "client"
                         },
                         new
                         {
-                            Id = "8a27771a-b799-4e94-87fa-182c2d3682b9",
+                            Id = "2f09d980-6eab-4390-bdc5-7f494fdbcfbc",
                             Name = "seller",
                             NormalizedName = "seller"
                         });
