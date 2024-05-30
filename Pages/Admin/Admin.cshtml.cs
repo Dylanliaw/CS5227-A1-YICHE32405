@@ -19,12 +19,12 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
         private readonly IWebHostEnvironment _environment;
 
         [BindProperty]
-        public Menu? Menu { get; set; } // Making Menu nullable
+        public Menu? Menu { get; set; }
 
         [BindProperty]
-        public IFormFile Image { get; set; } // Image is not nullable
+        public IFormFile Image { get; set; }
 
-        public List<Menu>? Menus { get; set; } // Making Menus nullable
+        public List<Menu>? Menus { get; set; }
 
         public AdminModel(ApplicationDbContext context, IWebHostEnvironment environment)
         {
@@ -34,7 +34,7 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
 
         public void OnGet()
         {
-            Menus = _context.Menus.ToList();
+            Menus = _context.Menus?.ToList() ?? new List<Menu>();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -44,15 +44,12 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
                 return Page();
             }
 
-            // Check if an image is provided
             if (Image == null || Image.Length == 0)
             {
-                // If no image is provided, add a model error
                 ModelState.AddModelError("Image", "Please upload an image.");
                 return Page();
             }
 
-            // Continue with the rest of your code to save the image and menu item
             var uploads = Path.Combine(_environment.WebRootPath, "uploads");
             if (!Directory.Exists(uploads))
             {
@@ -63,6 +60,7 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
             {
                 await Image.CopyToAsync(stream);
             }
+
             if (Menu != null)
             {
                 Menu.ImageUrl = "/uploads/" + Image.FileName;

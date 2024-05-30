@@ -12,11 +12,13 @@ html {
 
 .container {
     margin-top: 0px;
+    flex: 1;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
+
 
 .bg-custom {
     background-color: #E8DFCA;
@@ -63,13 +65,13 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
     background-image: url('/img/background1.jpg'); /* Adjust the path as per your project structure */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #E8DFCA;
 }
+
 
 /* Center the menu */
 .menu-container {
@@ -328,19 +330,24 @@ body {
 
 /* Styles for the footer */
 .footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: #E4FDE1; /* Light green color */
     color: #2F4F4F; /* Dark slate gray text color */
     text-align: center;
     padding: 20px 0;
-    margin-top: auto; /* Push the footer to the bottom */
+    z-index: 1000; /* Ensure footer appears above other content */
 }
 
 .footer a {
 color: #2F4F4F; /* Dark slate gray text color */
+text-decoration:none;
 }
 
 .footer a:hover {
-    color: #8B0000; /* Dark red color on hover */
+    color: #ccc; 
 }
 
 .search-bar {
@@ -462,4 +469,49 @@ label {
 /* Change text color of form labels */
 form .form-group label {
     color: #E8DFCA; /* Set label color */
+}
+.white-background-table {
+    background-color: white;
+}
+
+/* cart.css */
+.cart-table th,
+.cart-table td {
+    color: black; /* Set text color to black */
+}
+
+.title {
+    color: white;
+    font-size: 2.5rem;
+    margin-top: 50px;
+}
+
+.lead{
+    color:white;
+
+}
+
+/* Target the table element */
+table {
+    background-color: white;
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+}
+
+.btn-lg:hover {
+    color: white;
 }

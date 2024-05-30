@@ -6,65 +6,63 @@
 <!-- Add New Menu Item Form -->
 <h2>Add New Menu Item</h2>
 <form method="post" enctype="multipart/form-data">
-    <!-- Form fields for adding a new menu item -->
-    <!-- Food Name -->
     <div class="form-group">
         <label asp-for="Menu.FoodName"></label>
         <input asp-for="Menu.FoodName" class="form-control" required />
         <span asp-validation-for="Menu.FoodName" class="text-danger"></span>
     </div>
-    <!-- Description -->
     <div class="form-group">
         <label asp-for="Menu.Description"></label>
         <textarea asp-for="Menu.Description" class="form-control" required></textarea>
         <span asp-validation-for="Menu.Description" class="text-danger"></span>
     </div>
-    <!-- Price -->
     <div class="form-group">
         <label asp-for="Menu.Price"></label>
         <input asp-for="Menu.Price" class="form-control" required />
         <span asp-validation-for="Menu.Price" class="text-danger"></span>
     </div>
-    <!-- Image Upload -->
     <div class="form-group">
         <label for="image">Menu Image</label>
         <input type="file" name="Image" class="form-control-file" required />
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
-    <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <!-- Current Menu Items -->
 <h2 class="text-center">Current Menu Items</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Menus)
-        {
+@if (Model.Menus != null && Model.Menus.Any())
+{
+    <table class="table white-background-table">
+        <thead>
             <tr>
-                <!-- Display Menu Item Details -->
-                <td><img src="@item.ImageUrl" alt="@item.FoodName" style="width:100px; height:auto;" /></td>
-                <td>@item.FoodName</td>
-                <td>@item.Description</td>
-                <td>@item.Price</td>
-                <!-- Edit Button -->
-                <td>
-                    <a asp-page="./EditMenuItem" asp-route-id="@item.FoodId" class="btn btn-warning">Edit</a>
-                    <!-- Delete Button -->
-                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.FoodId" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Menus)
+            {
+                <tr>
+                    <td><img src="@item.ImageUrl" alt="@item.FoodName" style="width:100px; height:auto;" /></td>
+                    <td>@item.FoodName</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a asp-page="./EditMenuItem" asp-route-id="@item.FoodId" class="btn btn-warning">Edit</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@item.FoodId" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No menu items available.</p>
+}

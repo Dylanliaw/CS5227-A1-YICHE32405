@@ -110,7 +110,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasKey("CartId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.CartItem", b =>
@@ -145,7 +145,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.Customer", b =>
@@ -177,7 +177,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.Menu", b =>
@@ -202,7 +202,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasKey("FoodId");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menus", (string)null);
                 });
 
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.Sale", b =>
@@ -236,7 +236,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("CS5227_A1_YICHE32405.Model.SpecialOffer", b =>
@@ -264,7 +264,7 @@ namespace CS5227_A1_YICHE32405.Migrations
 
                     b.HasKey("FoodId");
 
-                    b.ToTable("SpecialOffers");
+                    b.ToTable("SpecialOffers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
