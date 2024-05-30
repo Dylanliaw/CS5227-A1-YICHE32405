@@ -52,10 +52,6 @@ html {
     margin-right:0px;
 }
 
-.navbar-nav .nav-link {
-    color: #ffffff; /* White color for the links */
-}
-
 .navbar-nav .nav-link:hover {
     color: #006769; /* Change to the specified color when hovered */
 }
@@ -68,6 +64,11 @@ html {
 
 body {
     margin-bottom: 60px;
+    background-image: url('/img/background1.jpg'); /* Adjust the path as per your project structure */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #E8DFCA;
 }
 
 /* Center the menu */
@@ -148,17 +149,17 @@ body {
     border-collapse: collapse;
 }
 
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
 
-    .table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #f2f2f2;
-    }
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+}
 
 /* Button styling */
 .btn-primary {
@@ -366,4 +367,99 @@ color: #2F4F4F; /* Dark slate gray text color */
     #map {
         height: 300px;
     }
+}
+
+/* styles.css */
+.go-to-menu-btn {
+    background-color: #1A4D2E;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.go-to-menu-btn:hover {
+    background-color: #135229;
+}
+
+/* styles.css */
+.search-btn {
+    background-color: #1A4D2E;
+    border-color: #1A4D2E;
+}
+
+.search-btn:hover {
+    background-color: #135229;
+    border-color: #135229;
+}
+
+.page-title,
+.search-bar {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    padding: 20px; /* Add padding to improve readability */
+    border-radius: 10px; /* Add border radius for rounded corners */
+}
+
+.page-title h2 {
+    color: white; /* Set heading color to white */
+}
+
+
+
+/* Change text color of form labels */
+#account .form-floating .form-label {
+    color: black; /* Text color */
+}
+
+/* Style labels and checkbox */
+label.form-label, .checkbox input[type="checkbox"] {
+    color: #E8DFCA; 
+}
+
+/* Style links */
+#forgot-password,
+#resend-confirmation,
+a[href*="Register"] {
+    color: #E8DFCA; /* Same color as the Remember me checkbox */
+}
+
+/* Style login button */
+#login-submit {
+    background-color: #4F6F52; /* New button color */
+    border-color: #4F6F52; /* Border color same as button color */
+    color: white; /* Text color */
+}
+
+/* Change text color of login button on hover */
+#login-submit:hover {
+    color: white; /* Text color */
+}
+
+/* Style register button */
+#registerSubmit {
+    background-color: #4F6F52; /* Button background color */
+    border-color: #4F6F52; /* Border color same as button color */
+    color: white; /* Text color */
+}
+
+/* Change text color of register button on hover */
+#registerSubmit:hover {
+    color: white; /* Text color */
+}
+
+/* Change text color of form labels */
+label {
+    color: black; /* Text color */
+}
+
+/* Change placeholder color */
+::placeholder {
+    color: black; /* Placeholder color */
+}
+
+/* Change text color of form labels */
+form .form-group label {
+    color: #E8DFCA; /* Set label color */
 }
