@@ -6,108 +6,91 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ShopModel : PageModel
+namespace CS5227_A1_YICHE32405.Pages.Sale
 {
-    private readonly ApplicationDbContext _context;
-
-    public ShopModel(ApplicationDbContext context)
+    public class ShopModel : PageModel
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public List<Menu> Menus { get; set; }
-    public List<CartItem> CartItems { get; set; }
-
-    [TempData]
-    public string Message { get; set; }
-
-    public void OnGet(string category)
-    {
-        // Fetch menu items based on the specified category
-        if (!string.IsNullOrEmpty(category))
+        public ShopModel(ApplicationDbContext context)
         {
-            Menus = _context.Menus.Where(m => m.Category == category).ToList();
-        }
-        else
-        {
-            // If no category is specified, return all menu items
-            Menus = _context.Menus.ToList();
+            _context = context;
         }
 
-        // Add Main Dishes to the menu
-        var mainDishes = _context.Menus.Where(m => m.Category == "Main").ToList();
-        if (mainDishes.Any())
+        public List<Menu> Menus { get; set; }
+        public List<CartItem> CartItems { get; set; }
+        public string Query { get; set; } // Add this property
+
+        [TempData]
+        public string Message { get; set; }
+
+        public void OnGet(string category, string query) // Modify OnGet to accept query parameter
         {
-            Menus.AddRange(mainDishes);
-        }
+            Query = query; // Set the Query property
 
-        // Retrieve cart items
-        var cart = HttpContext.Session.GetString("cart");
-        CartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
-    }
-
-    public IActionResult OnPostAddToCart(int foodId)
-    {
-        var foodItem = _context.Menus.Find(foodId);
-        if (foodItem == null)
-        {
-            return NotFound();
-        }
-
-        var cart = HttpContext.Session.GetString("cart");
-        List<CartItem> cartItems = cart == null ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
-
-        var cartItem = cartItems.SingleOrDefault(c => c.FoodId == foodId);
-        if (cartItem == null)
-        {
-            cartItems.Add(new CartItem
+            // Fetch menu items based on the specified category
+            if (!string.IsNullOrEmpty(category))
             {
-                FoodId = foodId,
-                FoodName = foodItem.FoodName,
-                Price = foodItem.Price,
-                Quantity = 1,
-                ImageUrl = foodItem.ImageUrl // Assuming Menu model has ImageUrl property
-            });
+                Menus = _context.Menus.Where(m => m.Category == category).ToList();
+            }
+            else
+            {
+                // If no category is specified, return all menu items
+                Menus = _context.Menus.ToList();
+            }
+
+            // Add Main Dishes to the menu
+            var mainDishes = _context.Menus.Where(m => m.Category == "Main").ToList();
+            if (mainDishes.Any())
+            {
+                Menus.AddRange(mainDishes);
+            }
+
+            // Filter menu items based on the search query
+            if (!string.IsNullOrEmpty(query))
+            {
+                Menus = Menus.Where(m => m.FoodName.Contains(query)).ToList();
+            }
+
+            // Retrieve cart items
+            var cart = HttpContext.Session.GetString("cart");
+            CartItems = string.IsNullOrEmpty(cart) ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
         }
-        else
+
+        public IActionResult OnPostAddToCart(int foodId)
         {
-            cartItem.Quantity++;
+            var foodItem = _context.Menus.Find(foodId);
+            if (foodItem == null)
+            {
+                return NotFound();
+            }
+
+            var cart = HttpContext.Session.GetString("cart");
+            List<CartItem> cartItems = cart == null ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
+
+            var cartItem = cartItems.SingleOrDefault(c => c.FoodId == foodId);
+            if (cartItem == null)
+            {
+                cartItems.Add(new CartItem
+                {
+                    FoodId = foodId,
+                    FoodName = foodItem.FoodName,
+                    Price = foodItem.Price,
+                    Quantity = 1,
+                    ImageUrl = foodItem.ImageUrl // Assuming Menu model has ImageUrl property
+                });
+            }
+            else
+            {
+                cartItem.Quantity++;
+            }
+
+            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cartItems));
+
+            // Set message for item added
+            Message = $"{foodItem.FoodName} added to cart.";
+
+            return RedirectToPage();
         }
-
-        HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cartItems));
-
-        // Set message for item added
-        Message = $"{foodItem.FoodName} added to cart.";
-
-        return RedirectToPage("/Sale/Shop"); 
-    }
-
-    public IActionResult OnGetSearch(string query)
-    {
-        if (string.IsNullOrEmpty(query))
-        {
-            // If the search query is empty, return all food items
-            Menus = _context.Menus.ToList();
-            Message = "No matching food items found.";
-        }
-        else
-        {
-            // Filter food items based on the search query
-            Menus = _context.Menus.Where(m => m.FoodName.Contains(query)).ToList();
-        }
-
-        if (Menus.Count == 0)
-        {
-            // If no food items match the search query, display a message
-            Message = "No matching food items found.";
-        }
-        else
-        {
-            // Clear any previous message
-            Message = null;
-        }
-
-        // Refresh the page to display the search results
-        return Page();
     }
 }

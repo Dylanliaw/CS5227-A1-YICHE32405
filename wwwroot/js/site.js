@@ -28,16 +28,3 @@ function initMap() {
 }
 
 
-// Function to maintain scroll position when navigating back
-window.onload = function () {
-    var scrollPosition = sessionStorage.getItem('scrollPosition');
-    if (scrollPosition) {
-        window.scrollTo(0, scrollPosition);
-        sessionStorage.removeItem('scrollPosition');
-    }
-};
-
-// Function to store scroll position before leaving the page
-window.onbeforeunload = function () {
-    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-};
