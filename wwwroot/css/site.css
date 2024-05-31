@@ -529,11 +529,11 @@ h3 {
     color: white;
 }
 
-#account .form-floating .form-label {
+.form-label {
     color: black;
 }
 
-label.form-label, .checkbox input[type="checkbox"] {
+label.form-label-color, .checkbox input[type="checkbox"] {
     color: #E8DFCA;
 }
 
@@ -637,4 +637,14 @@ table {
     100% {
         opacity: 0;
     }
+}
+
+.col-md-9 {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-md-9 h3 {
+    margin-right: 0; /* Resetting margin */
+    align-self: flex-start; /* Align the h3 to the start (top) of its flex container */
 }
