@@ -455,6 +455,13 @@ body {
     z-index: 1000;
 }
 
+/* Center align the titles */
+h3 {
+    text-align: center;
+    margin-top: 20px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
 .footer a {
     color: #2F4F4F;
     text-decoration: none;
