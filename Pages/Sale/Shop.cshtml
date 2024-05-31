@@ -46,7 +46,7 @@
                             <div class="menu-details card-body">
                                 <div class="menu-name card-title">@food.FoodName</div>
                                 <div class="menu-description card-text">@food.Description</div>
-                                <div class="menu-price">$@food.Price</div>
+                                <div class="menu-price">$@food.Price.ToString(".00")</div>
                                 <form method="post" asp-page-handler="AddToCart">
                                     <input type="hidden" name="foodId" value="@food.FoodId" />
                                     <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
