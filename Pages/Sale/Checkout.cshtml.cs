@@ -1,63 +1,67 @@
+using CS5227_A1_YICHE32405.Areas.Identity.Data;
+using CS5227_A1_YICHE32405.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using CS5227_A1_YICHE32405.Model;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CS5227_A1_YICHE32405.Pages.Sale
 {
     public class CheckoutModel : PageModel
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ApplicationDbContext _context;
 
-        public CheckoutModel(IHttpContextAccessor httpContextAccessor)
+        public CheckoutModel(ApplicationDbContext context)
         {
-            _httpContextAccessor = httpContextAccessor;
+            _context = context;
         }
 
-        public List<CartItem> CartItems { get; set; }
+        [BindProperty]
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 
         [BindProperty]
-        public Checkout CheckoutInfo { get; set; }
+        public CS5227_A1_YICHE32405.Model.Sale Sale { get; set; }
 
         public void OnGet()
         {
             LoadCart();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                // Reload cart items and return to checkout page if model is not valid
                 LoadCart();
                 return Page();
             }
 
-            // Save order details and cart items to TempData
-            TempData["CustomerName"] = CheckoutInfo.Name;
-            TempData["CustomerEmail"] = CheckoutInfo.Email;
-            TempData["CustomerPhone"] = CheckoutInfo.Phone;
-            TempData["OrderTime"] = CheckoutInfo.OrderTime;
-            TempData["CartItems"] = JsonConvert.SerializeObject(CartItems);
+            var sale = new CS5227_A1_YICHE32405.Model.Sale
+            {
+                CustomerName = Sale.CustomerName,
+                CustomerEmail = Sale.CustomerEmail,
+                CustomerPhone = Sale.CustomerPhone,
+                OrderTime = DateTime.Now,
+                Quantity = CartItems.Sum(item => item.Quantity)
+            };
 
-            SaveOrderToDatabase();
+            _context.Sales.Add(sale);
+            await _context.SaveChangesAsync();
 
+            // Clear the cart after successful checkout
             HttpContext.Session.Remove("cart");
 
-            return RedirectToPage("/Sale/OrderConfirmation");
+            // Redirect to the order confirmation page after successfully processing the order
+            return RedirectToPage("/Sale/OrderConfirmation", new { id = sale.Id, customerName = sale.CustomerName, customerEmail = sale.CustomerEmail, customerPhone = sale.CustomerPhone, orderTime = sale.OrderTime });
         }
 
         private void LoadCart()
         {
-            var cart = _httpContextAccessor.HttpContext.Session.GetString("cart");
+            var cart = HttpContext.Session.GetString("cart");
             CartItems = cart == null ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
-        }
-
-        private void SaveOrderToDatabase()
-        {
-            // Implement logic to save order details to the database
         }
     }
 }

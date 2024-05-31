@@ -1,24 +1,23 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
-using CS5227_A1_YICHE32405.Model;
+using System;
 
 namespace CS5227_A1_YICHE32405.Pages.Sale
 {
     public class OrderConfirmationModel : PageModel
     {
+        public int SaleId { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhone { get; set; }
-        public string OrderTime { get; set; }
+        public DateTime OrderTime { get; set; }
 
-        public void OnGet()
+        public void OnGet(int id, string customerName, string customerEmail, string customerPhone, DateTime orderTime)
         {
-            // Retrieve order details from TempData
-            CustomerName = TempData["CustomerName"]?.ToString();
-            CustomerEmail = TempData["CustomerEmail"]?.ToString();
-            CustomerPhone = TempData["CustomerPhone"]?.ToString();
-            OrderTime = TempData["OrderTime"]?.ToString();
+            SaleId = id;
+            CustomerName = customerName;
+            CustomerEmail = customerEmail;
+            CustomerPhone = customerPhone;
+            OrderTime = orderTime;
         }
     }
 }
