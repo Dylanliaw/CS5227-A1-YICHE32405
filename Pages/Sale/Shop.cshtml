@@ -35,7 +35,7 @@
         {
             if (Model.Menus.Any(food => food.Category == category))
             {
-                <h3>@category</h3>
+                <h3 class="page-title">@category</h3>
                 <div class="menu-container">
                     @foreach (var food in Model.Menus.Where(food => food.Category == category))
                     {

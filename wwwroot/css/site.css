@@ -519,15 +519,15 @@ h3 {
     border-color: #135229;
 }
 
-.page-title, .search-bar {
+.page-title {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
 }
 
-    .page-title h2 {
-        color: white;
-    }
+.page-title h2 {
+    color: white;
+}
 
 #account .form-floating .form-label {
     color: black;
