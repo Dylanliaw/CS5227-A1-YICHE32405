@@ -28,38 +28,86 @@
         </div>
     }
 
-    <!-- Menu Sections -->
-    @if (Model.Menus != null && Model.Menus.Any())
+    <!-- Special Offers -->
+    @if (Model.Menus != null && Model.Menus.Any(food => food.Category == "Special Offers"))
     {
-        foreach (var category in Model.Menus.Select(food => food.Category).Distinct())
-        {
-            if (Model.Menus.Any(food => food.Category == category))
+        <h3 class="page-title">Special Offers</h3>
+        <div class="menu-container">
+            @foreach (var food in Model.Menus.Where(food => food.Category == "Special Offers"))
             {
-                <h3 class="page-title">@category</h3>
-                <div class="menu-container">
-                    @foreach (var food in Model.Menus.Where(food => food.Category == category))
-                    {
-                        <div class="menu-item card">
-                            <div class="menu-img-container">
-                                <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
-                            </div>
-                            <div class="menu-details card-body">
-                                <div class="menu-name card-title">@food.FoodName</div>
-                                <div class="menu-description card-text">@food.Description</div>
-                                <div class="menu-price">$@food.Price.ToString(".00")</div>
-                                <form method="post" asp-page-handler="AddToCart">
-                                    <input type="hidden" name="foodId" value="@food.FoodId" />
-                                    <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    }
+                <div class="menu-item card">
+                    <div class="menu-img-container">
+                        <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+                    </div>
+                    <div class="menu-details card-body">
+                        <div class="menu-name card-title">@food.FoodName</div>
+                        <div class="menu-description card-text">@food.Description</div>
+                        <div class="menu-price">$@food.Price.ToString(".00")</div>
+                        <form method="post" asp-page-handler="AddToCart">
+                            <input type="hidden" name="foodId" value="@food.FoodId" />
+                            <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
             }
-        }
+        </div>
     }
-    else
+
+    <!-- Appetizers -->
+    @if (Model.Menus != null && Model.Menus.Any(food => food.Category == "Appetizers"))
+    {
+        <h3 class="page-title">Appetizers</h3>
+        <div class="menu-container">
+            @foreach (var food in Model.Menus.Where(food => food.Category == "Appetizers"))
+            {
+                <div class="menu-item card">
+                    <div class="menu-img-container">
+                        <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+                    </div>
+                    <div class="menu-details card-body">
+                        <div class="menu-name card-title">@food.FoodName</div>
+                        <div class="menu-description card-text">@food.Description</div>
+                        <div class="menu-price">$@food.Price.ToString(".00")</div>
+                        <form method="post" asp-page-handler="AddToCart">
+                            <input type="hidden" name="foodId" value="@food.FoodId" />
+                            <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Rest of the Menu -->
+    @foreach (var category in Model.Menus.Select(food => food.Category).Distinct().Where(cat => cat != "Special Offers" && cat != "Appetizers"))
+    {
+        <h3 class="page-title">@category</h3>
+        <div class="menu-container">
+            @foreach (var food in Model.Menus.Where(food => food.Category == category))
+            {
+                <div class="menu-item card">
+                    <div class="menu-img-container">
+                        <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+                    </div>
+                    <div class="menu-details card-body">
+                        <div class="menu-name card-title">@food.FoodName</div>
+                        <div class="menu-description card-text">@food.Description</div>
+                        <div class="menu-price">$@food.Price.ToString(".00")</div>
+                        <form method="post" asp-page-handler="AddToCart">
+                            <input type="hidden" name="foodId" value="@food.FoodId" />
+                            <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    
+    <!-- If no menu items found -->
+    @if (!Model.Menus.Any())
     {
         <p>No menu items found.</p>
     }
+    
 </div>
