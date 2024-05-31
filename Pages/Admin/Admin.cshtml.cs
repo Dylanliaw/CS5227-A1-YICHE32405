@@ -1,14 +1,14 @@
 using CS5227_A1_YICHE32405.Areas.Identity.Data;
 using CS5227_A1_YICHE32405.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace CS5227_A1_YICHE32405.Pages.Admin
 {
@@ -19,12 +19,12 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
         private readonly IWebHostEnvironment _environment;
 
         [BindProperty]
-        public Menu? Menu { get; set; }
+        public Menu Menu { get; set; }
 
         [BindProperty]
         public IFormFile Image { get; set; }
 
-        public List<Menu>? Menus { get; set; }
+        public List<Menu> Menus { get; set; }
 
         public AdminModel(ApplicationDbContext context, IWebHostEnvironment environment)
         {
@@ -34,7 +34,7 @@ namespace CS5227_A1_YICHE32405.Pages.Admin
 
         public void OnGet()
         {
-            Menus = _context.Menus?.ToList() ?? new List<Menu>();
+            Menus = _context.Menus.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync()

@@ -10,6 +10,6 @@ namespace CS5227_A1_YICHE32405.Model
         public string? Description { get; set; }
         public float Price { get; set; }
         public string? ImageUrl { get; set; }
-        public string? Category { get; set; } // Category represented as string
+        public string? Category { get; set; } // Add category property
     }
 }

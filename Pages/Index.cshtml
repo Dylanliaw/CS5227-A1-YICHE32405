@@ -19,7 +19,39 @@
             <div class="col-lg-12 text-center">
                 <h1 class="title">Welcome to Dylan's Imperial Wok</h1>
                 <p class="lead">Where tradition meets taste</p>
-                <a href="/Sale/Shop" class="btn btn-primary btn-lg">Order Now</a>
+                
+            </div>
+        </div>
+
+        <!-- Special Offer Foods Section -->
+        <div class="row mt-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="title">Special Offer Foods</h2>
+                <div class="menu-container">
+
+                    @foreach (var specialOffer in Model.SpecialOffers)
+                    {
+                        <div class="menu-item card">
+                            <div class="menu-img-container">
+                                <img class="menu-img" src="@specialOffer.ImageUrl" alt="@specialOffer.FoodName" />
+                            </div>
+                            <div class="menu-details card-body">
+                                <div class="menu-name card-title">@specialOffer.FoodName</div>
+                                <div class="menu-description card-text">@specialOffer.Description</div>
+                                    <a href="/Sale/Shop" class="btn btn-primary">Order Now</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Direct Users to Menu Page -->
+        <div class="row mt-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="title">Explore Our Full Menu</h2>
+                <p class="lead">Check out our complete menu with a variety of delicious dishes.</p>
+                <a href="/Sale/Shop" class="btn btn-secondary btn-lg">View Menu</a>
             </div>
         </div>
     </div>

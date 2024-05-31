@@ -26,43 +26,59 @@
         <input type="file" name="Image" class="form-control-file" required />
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Menu.Category">Category</label>
+        <select asp-for="Menu.Category" class="form-control" required>
+            <option value="">Select Category</option>
+            <option value="Appetizers">Appetizers</option>
+            <option value="Main Dishes">Main Dishes</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Beverages">Beverages</option>
+            <option value="Special Offers">Special Offers</option>
+        </select>
+        <span asp-validation-for="Menu.Category" class="text-danger"></span>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <!-- Current Menu Items -->
 <h2 class="text-center">Current Menu Items</h2>
-@if (Model.Menus != null && Model.Menus.Any())
-{
-    <table class="table white-background-table">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Menus)
-            {
+<div class="container admin-table-container" style="padding-bottom: 80px;">
+    @if (Model.Menus != null && Model.Menus.Any())
+    {
+        <table class="table white-background-table">
+            <thead>
                 <tr>
-                    <td><img src="@item.ImageUrl" alt="@item.FoodName" style="width:100px; height:auto;" /></td>
-                    <td>@item.FoodName</td>
-                    <td>@item.Description</td>
-                    <td>@item.Price</td>
-                    <td>
-                        <a asp-page="./EditMenuItem" asp-route-id="@item.FoodId" class="btn btn-warning">Edit</a>
-                        <form method="post" asp-page-handler="Delete" asp-route-id="@item.FoodId" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No menu items available.</p>
-}
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Menus)
+                {
+                    <tr>
+                        <td><img src="@item.ImageUrl" alt="@item.FoodName" style="width:100px; height:auto;" /></td>
+                        <td>@item.FoodName</td>
+                        <td>@item.Description</td>
+                        <td>@item.Price</td>
+                        <td>@item.Category</td>
+                        <td>
+                            <a asp-page="./EditMenuItem" asp-route-id="@item.FoodId" class="btn btn-warning">Edit</a>
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@item.FoodId" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No menu items available.</p>
+    }
+</div>

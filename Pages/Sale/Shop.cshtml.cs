@@ -1,8 +1,7 @@
 using CS5227_A1_YICHE32405.Areas.Identity.Data;
 using CS5227_A1_YICHE32405.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +21,25 @@ public class ShopModel : PageModel
     [TempData]
     public string Message { get; set; }
 
-    public void OnGet()
+    public void OnGet(string category)
     {
-        Menus = _context.Menus.ToList();
+        // Fetch menu items based on the specified category
+        if (!string.IsNullOrEmpty(category))
+        {
+            Menus = _context.Menus.Where(m => m.Category == category).ToList();
+        }
+        else
+        {
+            // If no category is specified, return all menu items
+            Menus = _context.Menus.ToList();
+        }
+
+        // Add Main Dishes to the menu
+        var mainDishes = _context.Menus.Where(m => m.Category == "Main").ToList();
+        if (mainDishes.Any())
+        {
+            Menus.AddRange(mainDishes);
+        }
 
         // Retrieve cart items
         var cart = HttpContext.Session.GetString("cart");
@@ -64,7 +79,7 @@ public class ShopModel : PageModel
         // Set message for item added
         Message = $"{foodItem.FoodName} added to cart.";
 
-        return RedirectToPage();
+        return RedirectToPage("/Sale/Shop"); 
     }
 
     public IActionResult OnGetSearch(string query)

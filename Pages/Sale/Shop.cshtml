@@ -4,42 +4,55 @@
     ViewData["Title"] = "Menu";
 }
 
-<!-- Title with horizontal lines -->
-<div class="page-title">
-    <hr class="title-hr" />
-    <h2 class="text-center">Menu</h2>
-    <hr class="title-hr" />
-</div>
+<div class="container">
+    <!-- Title with horizontal lines -->
+    <div class="page-title">
+        <hr class="title-hr" />
+        <h2 class="text-center">Menu</h2>
+        <hr class="title-hr" />
+    </div>
 
-<!-- Search bar -->
-<div class="search-bar">
-    <form method="get" asp-page-handler="Search">
-        <input type="text" name="query" placeholder="Search for food items..." />
-        <button type="submit" class="btn btn-primary search-btn">Search</button>
-    </form>
-</div>
+    <!-- Search bar -->
+    <div class="search-bar">
+        <form method="get" asp-page-handler="Search">
+            <input type="text" name="query" placeholder="Search for food items..." />
+            <button type="submit" class="btn btn-primary search-btn">Search</button>
+        </form>
+    </div>
 
-<div class="menu-container">
-    @foreach (var food in Model.Menus)
+    <!-- Menu Sections -->
+    @foreach (var category in Model.Menus.Select(food => food.Category).Distinct())
     {
-        <div class="menu-item">
-            <div class="menu-img-container">
-                <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+        if (Model.Menus.Any(food => food.Category == category))
+        {
+            <h3>@category</h3>
+            <div class="menu-container">
+                @foreach (var food in Model.Menus.Where(food => food.Category == category))
+                {
+                    <div class="menu-item card">
+                        <div class="menu-img-container">
+                            <img class="menu-img" src="@food.ImageUrl" alt="@food.FoodName" />
+                        </div>
+                        <div class="menu-details card-body">
+                            <div class="menu-name card-title">@food.FoodName</div>
+                            <div class="menu-description card-text">@food.Description</div>
+                            <div class="menu-price">$@food.Price</div>
+                            <form method="post" asp-page-handler="AddToCart">
+                                <input type="hidden" name="foodId" value="@food.FoodId" />
+                                <button type="submit" class="btn btn-success add-to-cart-btn">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="menu-details">
-                <div class="menu-name">@food.FoodName</div>
-                <div class="menu-description">@food.Description</div>
-                <div class="menu-price">$@food.Price</div>
-                <form method="post" asp-page-handler="AddToCart">
-                    <input type="hidden" name="foodId" value="@food.FoodId" />
-                    <button type="submit" class="btn btn-success">Add to Cart</button>
-                </form>
-            </div>
+        }
+    }
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="center-message">
+            <div class="alert alert-success">@Model.Message</div>
         </div>
     }
-</div>
 
-@if (!string.IsNullOrEmpty(Model.Message))
-{
-    <div class="alert alert-success">@Model.Message</div>
-}
+</div>

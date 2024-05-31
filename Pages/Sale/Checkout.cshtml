@@ -31,35 +31,37 @@
     </form>
 
     <h3>Your Cart Items</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.CartItems)
-            {
+    <div class="container checkout-table-container">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td><img src="@item.ImageUrl" alt="@item.FoodName" width="50" /></td>
-                    <td>@item.FoodName</td>
-                    <td>$@item.Price</td>
-                    <td>@item.Quantity</td>
-                    <td>$@(item.Price * item.Quantity)</td>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4">Total:</td>
-                <td>$@(Model.CartItems.Sum(item => item.Price * item.Quantity).ToString("0.00"))</td>
-            </tr>
-        </tfoot>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td><img src="@item.ImageUrl" alt="@item.FoodName" width="50" /></td>
+                        <td>@item.FoodName</td>
+                        <td>$@item.Price</td>
+                        <td>@item.Quantity</td>
+                        <td>$@(item.Price * item.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Total:</td>
+                    <td>$@(Model.CartItems.Sum(item => item.Price * item.Quantity).ToString("0.00"))</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
 }
 else
